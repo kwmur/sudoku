@@ -4,20 +4,22 @@
 function removeGroupRepetition($cells)
 {
   // 3*3 ごとのgroup
-  for ($group = 0; $group < 3; ++$group) {
-    echo "group = $group\n";
-    $tmp = [];
-    for ($row = 3 * $group; $row < 3 * ($group + 1); ++$row) {
-      echo "	row = $row\n";
-      for ($column = 3 * $group; $column < 3 * ($group + 1); ++$column) {
-        echo "		column = $column\n";
-        if (!in_array($cells[$row][$column], $tmp)) {
-          $tmp[] = $cells[$row][$column];
-          echo "		if = $column\n";
-        }
-        else {
-          echo "		else = $column\n";
-          $cells[$row][$column] = null;
+  for ($rowGroup = 0; $rowGroup < 3; ++$rowGroup) {
+    echo "rowGroup = $rowGroup\n";
+    echo "	row = $row\n";
+    for ($colgroup = 0; $colgroup < 3; ++$colgroup) {
+      $tmp = [];
+      for ($row = 3 * $rowGroup; $row < 3 * ($rowGroup + 1); ++$row) {
+        for ($column = 3 * $colgroup; $column < 3 * ($colgroup + 1); ++$column) {
+          echo "		column = $column\n";
+          if (in_array($cells[$row][$column], $tmp)) {
+            echo "		if = $column\n";
+            $cells[$row][$column] = null;
+          }
+          else {
+            echo "		else = $column\n";
+            $tmp[] = $cells[$row][$column];
+          }
         }
       }
     }
@@ -27,9 +29,9 @@ function removeGroupRepetition($cells)
 }
 
 $cells = [
-  [1, 1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 1, 1, 1, 1, 1, 1, 1, 1],
-  [1, 1, 1, 1, 1, 1, 1, 1, 1],
+  [1, 1, 1, 2, 2, 2, 3, 3, 3],
+  [1, 1, 1, 2, 2, 2, 3, 3, 3],
+  [1, 1, 1, 2, 2, 2, 3, 3, 3],
   [1, 1, 1, 1, 1, 1, 1, 1, 1],
   [1, 1, 1, 1, 1, 1, 1, 1, 1],
   [1, 1, 1, 1, 1, 1, 1, 1, 1],
@@ -39,5 +41,5 @@ $cells = [
 ];
 
 $cells = removeGroupRepetition($cells);
-#print_r($cells);
+print_r($cells);
 

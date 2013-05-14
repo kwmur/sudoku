@@ -6,22 +6,32 @@ function judge()
 
 function removeGroupRepetition($cells)
 {
-  // 3*3 ごとのgroup
-  for ($group = 0; $group < 3; ++$group) {
-    $tmp = [];
-    for ($row = 3 * $group; $row < 3 * ($group + 1); ++$row) {
-      for ($column = 3 * $group; $column < 3 * ($group + 1); ++$column) {
-        if (!in_array($cells[$row][$column], $tmp)) {
-          $tmp[] = $cells[$row][$column];
-        }
-        else {
-          $cells[$row][$column] = null;
+ // 3*3 ごとのgroup
+  for ($rowGroup = 0; $rowGroup < 3; ++$rowGroup) {
+    echo "rowGroup = $rowGroup\n";
+    echo "	row = $row\n";
+    for ($colgroup = 0; $colgroup < 3; ++$colgroup) {
+      $tmp = [];
+      for ($row = 3 * $rowGroup; $row < 3 * ($rowGroup + 1); ++$row) {
+        for ($column = 3 * $colgroup; $column < 3 * ($colgroup + 1); ++$column) {
+          echo "		column = $column\n";
+          if (in_array($cells[$row][$column], $tmp)) {
+            echo "		if = $column\n";
+            $cells[$row][$column] = null;
+          }
+          else {
+            echo "		else = $column\n";
+            $tmp[] = $cells[$row][$column];
+          }
         }
       }
     }
+//    print_r($tmp);
   }
   return $cells;
 }
+
+
 
 function removeColumnRepetition($cells)
 {
@@ -62,8 +72,8 @@ function makeCells()
     }
   }
 
-//  $cells = removeColumnRepetition($cells);
-  $cells = removeGroupRepetition($cells);
+  $cells = removeColumnRepetition($cells);
+//  $cells = removeGroupRepetition($cells);
 
   return $cells;
 }
@@ -97,7 +107,7 @@ td {
 
 input[type=number] {
   text-align: right;
-  width: 18px;
+  width: 28px;
 }
 
 input[type=number].readonly  {
@@ -120,10 +130,10 @@ input[type=number].readonly  {
     echo "<tr><th>" . ($index + 0)  . "</th>";
     foreach ($row as $value) {
       if (isset($value)) {
-        echo '<td><input type="number" value="' .  $value . '" size="1" readonly="readonly" class="readonly" /></td>';
+        echo '<td><input type="number" value="' .  $value . '" size="2" readonly="readonly" class="readonly" /></td>';
       }
       else {
-        echo '<td><input type="number" value="' . $value . '" size="1"/></td>';
+        echo '<td><input type="number" value="' . $value . '" size="2"/></td>';
       }
     }
     echo '</tr>';
