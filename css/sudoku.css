@@ -1,0 +1,33 @@
+
+body {
+  padding-left: 40px;
+}
+
+table {
+  border-collapse: collapse; /* 枠線の表示方法 */ 
+  border: 1px #1C79C6 solid; /* テーブル全体の枠線（太さ・色・スタイル） */
+}
+
+th {
+  background-color: #dddddd;
+  border: 1px #1C79C6 solid;
+  width: 35px;
+  height: 35px;
+}
+
+td {
+  border: 1px #1C79C6 solid; /* セルの枠線（太さ・色・スタイル） */
+  xpadding 5px;
+}
+
+input[type=number] {
+  text-align: right;
+  width: 28px;
+  height: 25px;
+  margin: 5px;
+}
+
+input[type=number].readonly {
+  background-color: #ddddff;
+}
+
